@@ -1,0 +1,26 @@
+{
+  "name": "default-template",
+  "version": "2.0.0",
+  "description": "一个用于定义默认值和转换对象结构的实用工具",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "prepublish": "npm run build",
+    "test": "echo \"Error: 暂无测试\" && exit 1"
+  },
+  "keywords": [
+    "template",
+    "default",
+    "object",
+    "transform",
+    "utility",
+    "默认值",
+    "模板"
+  ],
+  "author": "yuantao_npm <69455804@qq.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^4.9.5"
+  }
+}
