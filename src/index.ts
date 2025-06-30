@@ -248,8 +248,8 @@ function convertToType(type: any, val: any) {
  * @param opt 选项配置，可以自定义通配符键名
  * @returns 处理后的数据
  */
-export default function defaultTemplate(def: any, src: any, opt: DefaultTemplateOption = { allTemplateKey: '?' }): any {
-  return internalTemplate(def, src, opt, undefined);
+export default function defaultTemplate<T>(def: T, src: any, opt: DefaultTemplateOption = { allTemplateKey: '?' }): T {
+  return internalTemplate(def, src, opt, undefined) as T;
 }
 
 /**
