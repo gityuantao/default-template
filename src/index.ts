@@ -155,6 +155,22 @@ function convertToType(type: any, val: any) {
 }
 
 /**
+ * 根据模板类型 T 递归推导最终返回类型：
+ * - 如果是函数，取其返回值类型
+ * - 如果是数组，递归处理元素类型
+ * - 如果是对象，递归处理每个字段
+ * - 其他类型原样返回
+ */
+export type TemplateResult<T> =
+  T extends (...args: any[]) => infer R
+    ? R
+    : T extends Array<infer U>
+      ? Array<TemplateResult<U>>
+      : T extends object
+        ? { [K in keyof T]: TemplateResult<T[K]> }
+        : T;
+
+/**
  * 默认值模板函数，用于处理数据结构的默认值、类型转换和键名映射
  * 
  * 主要功能：
@@ -248,8 +264,8 @@ function convertToType(type: any, val: any) {
  * @param opt 选项配置，可以自定义通配符键名
  * @returns 处理后的数据
  */
-export default function defaultTemplate<T>(def: T, src: any, opt: DefaultTemplateOption = { allTemplateKey: '?' }): T {
-  return internalTemplate(def, src, opt, undefined) as T;
+export default function defaultTemplate<T>(def: T, src: any, opt: DefaultTemplateOption = { allTemplateKey: '?' }): TemplateResult<T> {
+  return internalTemplate(def, src, opt, undefined) as TemplateResult<T>;
 }
 
 /**
