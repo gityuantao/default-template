@@ -308,9 +308,9 @@ function internalTemplate(def: any, src: any, opt: DefaultTemplateOption, owner:
         // 判断模板元素是否为对象模板
         if (isObject(def[0])) {
           return src.map(item => {
-            // 以原对象为基础补全模板字段
+            // 只保留模板字段
             if (isObject(item)) {
-              return { ...item, ...handleObjectTemplate(def[0], item, opt, src) };
+              return handleObjectTemplate(def[0], item, opt, src);
             }
             return internalTemplate(def[0], item, opt, src);
           });

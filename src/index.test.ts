@@ -79,8 +79,9 @@ describe('defaultTemplate', () => {
     const result2 = defaultTemplate([false], [1, 0, 'false']);
     console.log('数组：元素模板', result2);
     expect(result2).toEqual([true, false, false]);
-    const result3 = defaultTemplate([{ a: 1 }], [{ a: 2 }, { a: '3' }]);
+    const result3 = defaultTemplate([{ a: 1 }], [{ a: 2, b: 3 }, { a: '3', b: 4 }]);
     console.log('数组：元素模板', result3);
+    // 只保留模板字段 a
     expect(result3).toEqual([{ a: 2 }, { a: 3 }]);
   });
 
@@ -265,6 +266,7 @@ describe('defaultTemplate', () => {
   it('数组模板：字段补全', () => {
     const result = defaultTemplate([{ min: 0 }], [{ val: -1 }, { val: 5 }]);
     console.log('数组模板：字段补全', result);
-    expect(result).toEqual([{ min: 0, val: -1 }, { min: 0, val: 5 }]);
+    // 只保留模板字段 min
+    expect(result).toEqual([{ min: 0 }, { min: 0 }]);
   });
 }); 
