@@ -308,11 +308,8 @@ function internalTemplate(def: any, src: any, opt: DefaultTemplateOption, owner:
         // 判断模板元素是否为对象模板
         if (isObject(def[0])) {
           return src.map(item => {
-            // 只保留模板字段
-            if (isObject(item)) {
-              return handleObjectTemplate(def[0], item, opt, src);
-            }
-            return internalTemplate(def[0], item, opt, src);
+            // 只保留模板字段，且递归时不传原 item，防止多余字段混入
+            return handleObjectTemplate(def[0], item, opt, undefined);
           });
         } else {
           return src.map(item => internalTemplate(def[0], item, opt, src));

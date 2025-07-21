@@ -269,4 +269,18 @@ describe('defaultTemplate', () => {
     // 只保留模板字段 min
     expect(result).toEqual([{ min: 0 }, { min: 0 }]);
   });
+
+  it('嵌套对象+数组：只保留模板字段', () => {
+    const result = defaultTemplate(
+      { totalCount: 0, list: [{ id: 0, title: '', xxx: 'xxx' }] },
+      { list: [{ aaa: 'xx' }] }
+    );
+    console.log('嵌套对象+数组：只保留模板字段', result);
+    expect(result).toEqual({
+      totalCount: 0,
+      list: [
+        { id: 0, title: '', xxx: 'xxx' }
+      ]
+    });
+  });
 }); 
